@@ -1,0 +1,30 @@
+package base;
+import java.awt.Color;
+import java.awt.EventQueue;
+
+import javax.swing.JPanel;
+
+public class CardBox extends JPanel{
+	private int positionx=0;
+	private int positiony=0;
+	private int length=0;
+	private int width=0;
+	public CardBox(int px,int py){
+		positionx=px;
+		positiony=py;
+		this.setBackground(Color.BLACK);
+		this.setBounds(px, py, 102, 135);
+	}
+	public int getX(){
+		return positionx;
+	}
+	public int getY(){
+		return positiony;
+	}
+	void setX(int px){
+		positionx=px;
+	}
+	void setY(int py){
+		positiony=py;
+	}
+}

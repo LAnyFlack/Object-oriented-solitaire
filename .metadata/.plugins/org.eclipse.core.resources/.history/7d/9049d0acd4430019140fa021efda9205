@@ -1,0 +1,36 @@
+package base;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javax.swing.JLabel;
+
+public class Timer extends JLabel {
+	private int seconds=0;
+	private int minutes=0;
+	private Timer timer1; 
+	public Timer() {
+		this.setText(minutes+":"+seconds); 
+	}
+	
+	public void start() {
+		timer1 = new Timer(); 
+        timer1.scheduleAtFixedRate(new TimerTask() {
+        	int i=1;
+            public void run() {
+                //System.out.println(i);
+                setBounds(positionx, positiony, 100-5*i, 135);
+                i++;
+                if(i==20) {
+                	setupCard();
+				    timer1.cancel();
+                }
+            }
+        },0, 20);
+	}
+	
+	public void stop() {
+		
+		
+	}
+}

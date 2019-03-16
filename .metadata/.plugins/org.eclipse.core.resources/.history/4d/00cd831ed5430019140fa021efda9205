@@ -1,0 +1,34 @@
+package base;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javax.swing.JLabel;
+
+public class GameTimer extends JLabel {
+	private int seconds=0;
+	private int minutes=0;
+	private Timer timer1 = new Timer(); 
+	public GameTimer() {
+		this.setText(minutes+":"+seconds); 
+	}
+	
+	public void start() {
+		
+        timer1.scheduleAtFixedRate(new TimerTask() {
+        	int i=1;
+            public void run() {
+            	seconds+=1;
+            	i++;
+            	if(i%60==0) {
+            		minutes+=1;
+            	}
+            }
+        },0, 1000);
+	}
+	
+	public void stop() {
+		
+		timer1.cancel();
+	}
+}

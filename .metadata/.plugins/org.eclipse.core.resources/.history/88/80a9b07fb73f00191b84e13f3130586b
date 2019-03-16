@@ -1,0 +1,47 @@
+package base;
+import java.awt.Color;
+import java.awt.EventQueue;
+
+import javax.swing.JPanel;
+
+public class CardBox extends JPanel{
+	private int positionx=0;
+	private int positiony=0;
+	private int length=0;
+	private int width=0;
+	private boolean ifsetup=false;
+	public CardBox(int px,int py,boolean x){
+		positionx=px;
+		positiony=py;
+		if(x)
+			this.setBackground(Color.red);
+		this.setBounds(px, py, 102, 135);
+	}
+	public int getX(){
+		return positionx;
+	}
+	public int getY(){
+		return positiony;
+	}
+	public void setX(int px){
+		positionx=px;
+	}
+	public void setY(int py){
+		positiony=py;
+	}
+	public void setLocation(int x,int y) {
+		this.setBounds(x, y, 102, 135);
+	}
+	public void upsidedown() {
+		if(this.ifsetup==true)
+			this.ifsetup=false;
+		else
+			System.out.println("该卡片已是正面朝上！");
+	}
+	public void downsideup() {
+		if(this.ifsetup==false)
+			this.ifsetup=true;
+		else
+			System.out.println("该卡片已是背面朝上！");
+	}
+}

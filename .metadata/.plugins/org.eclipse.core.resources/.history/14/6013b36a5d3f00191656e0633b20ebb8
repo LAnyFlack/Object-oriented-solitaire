@@ -1,0 +1,8 @@
+package base;
+
+public class CardBox {
+	private int positionx=0;
+	private int positiony=0;
+	private int length=0;
+	private int width=0;
+}
