@@ -1,6 +1,5 @@
 package base;
 
-
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.TextField;
@@ -37,7 +36,7 @@ public class Card  extends JPanel{
 	private JPanel panel1;
 	public boolean isdown;
 	
-	//¹¹Ôìº¯Êý
+
 	public Card(int px,int py,boolean x,int huase,int poi){
 		x0=positionx=px;
 		y0=positiony=py; 
@@ -77,7 +76,7 @@ public class Card  extends JPanel{
 		setOpaque(false);
 	}
 	
-	//ÉèÖÃ×ø±ê
+
 	public void setLocation(int x,int y) {
 		this.setBounds(x, y, 102, 135);
 	}
@@ -107,7 +106,7 @@ public class Card  extends JPanel{
 	}
 	
 	
-	//½«ÕýÃæµÄ¿¨Æ¬·­·´
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½Æ¬ï¿½ï¿½ï¿½ï¿½
 	public void upsidedown() {
 		ifsetup=false;
  	    Timer timer1 = new Timer(); 
@@ -144,7 +143,7 @@ public class Card  extends JPanel{
         }, 400, 20);  	
 	}
 	
-	//½«·´ÃæµÄµÄ¿¨Æ¬·­Õý
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÄµÄ¿ï¿½Æ¬ï¿½ï¿½ï¿½ï¿½
 	public void downsideup() {
 		ifsetup=true;
 		 Timer timer1 = new Timer(); 
@@ -177,7 +176,7 @@ public class Card  extends JPanel{
 	        }, 400, 20);  	
 	}
 	
-	//ÉèÖÃ³õÊ¼ÕýÃæÏòÉÏµÄ¿¨Æ¬
+	//ï¿½ï¿½ï¿½Ã³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÄ¿ï¿½Æ¬
 	public void setupCard() {
 			this.setBackground(Color.white);
 			this.setBorder(BorderFactory.createLineBorder(Color.white, 22, true));
@@ -250,14 +249,14 @@ public class Card  extends JPanel{
 			}
 	}
 	
-	//ÉèÖÃ³õÊ¼·´ÃæÏòÉÏµÄ¿¨Æ¬
+	//ï¿½ï¿½ï¿½Ã³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÄ¿ï¿½Æ¬
 	public void setupdCard(){
 		this.setBackground(Color.gray);
 		this.setBorder(BorderFactory.createLineBorder(Color.gray, 22, true));
 		panel1.setBackground(Color.gray);
 	}
 	
-	//½«¿¨Æ¬·­Ãæ
+	//ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½ï¿½
 	public void swap() {
 		if(ifsetup) {
     		upsidedown();
@@ -267,7 +266,7 @@ public class Card  extends JPanel{
     	}
 	}
 	
-	//±³ÃæµÄÅÆÏòÓÒ·­
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò·ï¿½
 	public void toright() {
 		ifsetup=true;
  	    Timer timer1 = new Timer(); 
@@ -303,7 +302,7 @@ public class Card  extends JPanel{
      
 	}
 	
-	//ÕýÃæµÄÅÆÏò×ó·­
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void toleft() {
 		ifsetup=false;
  	    Timer timer1 = new Timer(); 
@@ -342,7 +341,7 @@ public class Card  extends JPanel{
 
 	}
 	
-	//ÅÆÏòÁíÒ»¸ö·½Ïò·­
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void tootherside() {
 		if(ifsetup) {
 			toleft();
@@ -353,12 +352,12 @@ public class Card  extends JPanel{
 	}
 	
 	/*public class MouseeListener  implements MouseMotionListener,MouseListener{
-		Frame frame = new Frame("¹ØÓÚÊó±êµÄ¶àÖØ¼àÌýÆ÷");
+		Frame frame = new Frame("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½");
 		TextField tField = new TextField(30);
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
-			//System.out.print("Êó±êµã»÷----" + "\t");
+			//System.out.print("ï¿½ï¿½ï¿½ï¿½ï¿½----" + "\t");
 			if (e.getClickCount()==1) {
 				//tootherside();
 				//toleft();
@@ -369,7 +368,7 @@ public class Card  extends JPanel{
 				
 			} 
 			else if (e.getClickCount()==3) {
-				System.out.println("ÈýÁ¬»÷£¡£¡");
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			}
 			
 		}
@@ -378,34 +377,34 @@ public class Card  extends JPanel{
 		public void mousePressed(MouseEvent e) {
 			// TODO Auto-generated method stub
 			isdown=true;
-			//System.out.println("Êó±ê°´ÏÂ");
+			//System.out.println("ï¿½ï¿½ê°´ï¿½ï¿½");
 			//setBounds(e.getX(), e.getY(), 102, 135);
-			//System.out.println("Êó±êÍÏ¶¯µ½Î»ÖÃ£º£¨" + e.getX() + "£¬" + e.getY() +"£©");
+			//System.out.println("ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½ï¿½ï¿½Î»ï¿½Ã£ï¿½ï¿½ï¿½" + e.getX() + "ï¿½ï¿½" + e.getY() +"ï¿½ï¿½");
 		}
 	 
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
-			//System.out.println("Êó±êËÉ¿ª");
+			//System.out.println("ï¿½ï¿½ï¿½ï¿½É¿ï¿½");
 			isdown=false;
 		}
 	 
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			// TODO Auto-generated method stub
-			//tField.setText("Êó±êÒÑ¾­½øÈë´°Ìå");
+			//tField.setText("ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ë´°ï¿½ï¿½");
 		}
 	 
 		@Override
 		public void mouseExited(MouseEvent e) {
 			// TODO Auto-generated method stub
-			//tField.setText("Êó±êÒÑ¾­ÒÆ³ö´°Ìå");
+			//tField.setText("ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
 	 
 		@Override
 		public void mouseDragged(MouseEvent e) {
 			// TODO Auto-generated method stub
-			//String string = "Êó±êÍÏ¶¯µ½Î»ÖÃ£º£¨" + e.getX() + "£¬" + e.getY() +"£©";
+			//String string = "ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½ï¿½ï¿½Î»ï¿½Ã£ï¿½ï¿½ï¿½" + e.getX() + "ï¿½ï¿½" + e.getY() +"ï¿½ï¿½";
 			//tField.setText(string);
 		}
 	 

@@ -3,10 +3,8 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.util.TimerTask;
 
 import javax.swing.JFrame;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.event.MouseInputListener;
@@ -17,7 +15,6 @@ import base.GameTimer;
 
 import java.awt.Color;
 import javax.swing.JLabel;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 
 public class GameTable {
@@ -206,10 +203,10 @@ public class GameTable {
 		Card01.canmove=true;
 		
 		class Drag implements MouseInputListener {
-			int moving = 0;  //ÏÔÊ¾PanelÊÇ·ñ´¦ÓÚÒÆ¶¯¹ı³ÌÖĞ£¬·ñÔòÖ»Òªµ¥»÷±ã»áµ÷ÓÃpressÀïÃæµÄ·½·¨
-			int xinit = 0;	 //Êó±ê°´ÏÂÊ±Ëù´¦µÄX×ø±ê
-			int yinit = 0;   //Êó±ê°´ÏÂÊ±Ëù´¦µÄY×ø±ê
-			int x0 = 0;		//ÍÏ×§¹ı³ÌÖĞÊó±êµÄÎ»ÖÃ
+			int moving = 0;  //ï¿½ï¿½Ê¾Panelï¿½Ç·ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ£ï¿½ï¿½ï¿½ï¿½ï¿½Ö»Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½pressï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½
+			int xinit = 0;	 //ï¿½ï¿½ê°´ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½
+			int yinit = 0;   //ï¿½ï¿½ê°´ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Yï¿½ï¿½ï¿½ï¿½
+			int x0 = 0;		//ï¿½ï¿½×§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
 			int y0 = 0;
 			Timer timer;
 			//Timer timer1;
@@ -230,17 +227,12 @@ public class GameTable {
 			@Override
 			public void mouseExited(MouseEvent e) {
 			}
-			
-			//Êó±ê°´ÏÂÊ±³õÊ¼»¯Ïß³Ì
+
 			@Override
 			public void mousePressed(MouseEvent e) {
-				//card0.canmove=true;
 				if(card0.getTop()&&card0.canmove) {
-					//setCannotMove(card0);
 					xinit = e.getX();
 					yinit = e.getY();
-					//card1=getCardbyPosition(xinit,yinit);
-				//	card1.canmove=true;card1.swap();
 					timer = new Timer(10, new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							maskJPanel.setBounds(x0 - xinit + card0.getX(), y0 - yinit
@@ -250,7 +242,6 @@ public class GameTable {
 				}
 			}
 			
-			//Êó±êËÉ¿ªÊ±½áÊøÏß³Ì
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				//if(false)
@@ -274,7 +265,6 @@ public class GameTable {
 				}
 			}
 			
-			//Êó±êÍÏ¶¯¹ı³ÌÖĞ£¬²»¶Ï¸üĞÂmaskPanelµÄÎ»ÖÃ
 			@Override
 			public void mouseDragged(MouseEvent arg0) {
 				if(card0.getTop()&&card0.canmove) {
