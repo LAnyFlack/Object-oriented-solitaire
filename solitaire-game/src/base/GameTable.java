@@ -11,6 +11,7 @@ import javax.swing.event.MouseInputListener;
 import base.GameTimer;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.ImageIcon;
 
 public class GameTable {
@@ -18,7 +19,7 @@ public class GameTable {
 	private JFrame frame;
 	final JPanel maskJPanel = new JPanel();
 	
-	private Card1 Card00 = new Card1(1,1,0,0,true);
+	private Card1 Card00 = new Card1(0,0,0,0,false);
 	
 	private Card1 Card01 = new Card1(5,3,60+6,180+17,true);
 	
@@ -26,7 +27,7 @@ public class GameTable {
 	private Card1 Card12 = new Card1(11,4,60+102+20+11,180+17,false);
 	
 	private Card1 Card21 = new Card1(11,1,60+102*2+20*2+15,180+35+35+17,true);
-	private Card1 Card22 = new Card1(13,4,60+102*2+20*2+15,180+35+17,false);
+	private Card1 Card22 = new Card1(10,4,60+102*2+20*2+15,180+35+17,false);
 	private Card1 Card23 = new Card1(12,2,60+102*2+20*2+15,180+17,false);
 	
 	private Card1 Card31 = new Card1(4,3,60+102*3+20*3+20,180+35+35+35+17,true);
@@ -50,7 +51,7 @@ public class GameTable {
 	private Card1 Card61 = new Card1(12,4,802+33,180+35+35+35+35+35+35+17,true);
 	private Card1 Card62 = new Card1(5,1,802+33,180+35+35+35+35+35+17,false);
 	private Card1 Card63 = new Card1(13,2,802+33,180+35+35+35+35+17,false);
-	private Card1 Card64 = new Card1(10,4,802+33,180+35+35+35+17,false);
+	private Card1 Card64 = new Card1(13,4,802+33,180+35+35+35+17,false);
 	private Card1 Card65 = new Card1(3,1,802+33,180+35+35+17,false);
 	private Card1 Card66 = new Card1(6,3,802+33,180+35+17,false);
 	private Card1 Card67 = new Card1(9,2,802+33,180+17,false);
@@ -85,6 +86,7 @@ public class GameTable {
 	private Card1 Cardw24 = new Card1(1,2,680+28,33,false);
 	
 	private int turncount = 0;
+	private int layer = 200;
 	
 	private Card1 crry[]= new Card1[28];
 	
@@ -142,11 +144,49 @@ public class GameTable {
 	}*/
 	
 	
+	@SuppressWarnings("deprecation")
 	private void initialize() {
 		Card1 crry[] = {Card01,Card11,Card12,Card21,Card22,Card23,Card31,
 						Card32,Card33,Card34,Card41,Card42,Card43,Card44,
 						Card45,Card51,Card52,Card53,Card54,Card55,Card56,
 						Card61,Card62,Card63,Card64,Card65,Card66,Card67};
+		
+		Card01.CardAbove=Card00;Card01.CardBlow=Card00;
+		
+		Card11.CardAbove=Card00;Card11.CardBlow=Card12;
+		Card12.CardAbove=Card11;Card12.CardBlow=Card00;
+		
+		Card21.CardAbove=Card00;Card21.CardBlow=Card22;
+		Card22.CardAbove=Card21;Card22.CardBlow=Card23;
+		Card23.CardAbove=Card22;Card23.CardBlow=Card00;
+		
+		Card31.CardAbove=Card00;Card31.CardBlow=Card32;
+		Card32.CardAbove=Card31;Card32.CardBlow=Card33;
+		Card33.CardAbove=Card32;Card33.CardBlow=Card34;
+		Card34.CardAbove=Card33;Card34.CardBlow=Card00;
+		
+		Card41.CardAbove=Card00;Card41.CardBlow=Card42;
+		Card42.CardAbove=Card41;Card42.CardBlow=Card43;
+		Card43.CardAbove=Card42;Card43.CardBlow=Card44;
+		Card44.CardAbove=Card43;Card44.CardBlow=Card45;
+		Card45.CardAbove=Card44;Card45.CardBlow=Card00;
+		
+		Card51.CardAbove=Card00;Card51.CardBlow=Card52;
+		Card52.CardAbove=Card51;Card52.CardBlow=Card53;
+		Card53.CardAbove=Card52;Card53.CardBlow=Card54;
+		Card54.CardAbove=Card53;Card54.CardBlow=Card55;
+		Card55.CardAbove=Card54;Card55.CardBlow=Card56;
+		Card56.CardAbove=Card55;Card56.CardBlow=Card00;
+		
+		Card61.CardAbove=Card00;Card61.CardBlow=Card62;
+		Card62.CardAbove=Card61;Card62.CardBlow=Card63;
+		Card63.CardAbove=Card62;Card63.CardBlow=Card64;
+		Card64.CardAbove=Card63;Card64.CardBlow=Card65;
+		Card65.CardAbove=Card63;Card65.CardBlow=Card66;
+		Card66.CardAbove=Card64;Card66.CardBlow=Card67;
+		Card67.CardAbove=Card66;Card67.CardBlow=Card00;
+		
+		
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.getContentPane().setForeground(Color.GRAY);
@@ -164,7 +204,7 @@ public class GameTable {
 		GameTimer gt = new GameTimer();
 		panel.add(gt);gt.start();
 		
-		JPanel panel_2 = new JPanel();
+		JLayeredPane panel_2 = new JLayeredPane();
 		panel_2.setBackground(new Color(0, 128, 0));
 		panel_2.setBounds(0, 66, 1000, 648);
 		frame.getContentPane().add(panel_2);
@@ -191,6 +231,7 @@ public class GameTable {
 			int y0 = 0;
 			int xx,xx1 = 0;
 			int yy,yy1 = 0;
+
 			Timer timer;
 			Card1 card0;
 			public Drag(Card1 Cardx) {
@@ -220,11 +261,67 @@ public class GameTable {
 				xx = card0.getX();
 				yy = card0.getY();
 				card0.canmove=true;
-				
-				if(card0.canmove) {
+				layer+=100;
+				if(card0.canmove && card0.getTop2() && card0.CardAbove == Card00) {
+					panel_2.setLayer(card0, new Integer(layer));
 					timer = new Timer(10, new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							card0.setBounds(x0 - xinit + xx, y0 - yinit+ yy, 102, 135);
+						}
+					});
+				}
+				else if(card0.canmove && !card0.getTop2() && card0.CardAbove != Card00) {
+					timer = new Timer(10, new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							card0.setBounds(x0 - xinit + xx, y0 - yinit+ yy, 102, 135);
+							card0.CardAbove.setPoisitionByCard(card0);
+							if(card0.CardAbove.CardAbove!=null) {
+								card0.CardAbove.CardAbove.setPoisitionByCard(card0.CardAbove);//3张
+								
+								if(card0.CardAbove.CardAbove.CardAbove!=null) {
+									card0.CardAbove.CardAbove.CardAbove.setPoisitionByCard(card0.CardAbove.CardAbove);//3张
+								
+								if(card0.CardAbove.CardAbove.CardAbove.CardAbove!=null) {
+									card0.CardAbove.CardAbove.CardAbove.CardAbove.setPoisitionByCard(card0.CardAbove.CardAbove.CardAbove);//4张卡
+									
+									if(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove!=null) {
+										card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.setPoisitionByCard(card0.CardAbove.CardAbove.CardAbove.CardAbove);//5张卡
+										
+										if(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove!=null) {
+											card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.setPoisitionByCard(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove);//6张卡
+											
+											if(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove!=null) {
+												card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.setPoisitionByCard(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove);//7张卡
+												
+												if(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove!=null) {
+													card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.setPoisitionByCard(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove);//8张卡
+													
+													if(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove!=null) {
+														card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.setPoisitionByCard(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove);//9张卡
+														
+														if(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove!=null) {
+															card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.setPoisitionByCard(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove);//10张卡
+															
+															if(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove!=null) {
+																card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.setPoisitionByCard(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove);//11张卡
+																
+																if(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove!=null) {
+																	card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.setPoisitionByCard(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove);//12张卡
+																	
+																	if(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove!=null) {
+																		card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.setPoisitionByCard(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove);//13张卡
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
 						}
 					});
 				}
@@ -237,20 +334,92 @@ public class GameTable {
 					if (moving == 1) {
 						int x1 = e.getX();
 						int y1 = e.getY();
-						int count = 0;
+						int count = 0,count1 = 0;
 						
 						while(count<=27) {
 							if(crry[count].getTop()) {
-								if(crry[count].getX()-30 < x1 && x1<crry[count].getX()+130 && crry[count].getY()-30 < y1 && y1<crry[count].getY()+100 && crry[count].getPoint() == card0.getPoint()+1) {
+								if(crry[count].getX()-30 < x1 && 
+								   x1<crry[count].getX()+130 && 
+								   crry[count].getY()-30 < y1 && 
+								   y1<crry[count].getY()+100 && 
+								   crry[count].getPoint() == card0.getPoint()+1 && 
+								   crry[count].getColor() != card0.getColor()
+								   )
+								{
 									card0.setPoisitionByCard(crry[count]);//附到crry[count]上
+										
+									Card1 cardxx=new Card1(0,0,0,0,false);
+									cardxx = card0.CardBlow;
+									cardxx.downsideup();
+									cardxx.CardAbove = Card00;
+										
+									card0.CardBlow.CardAbove = Card00;
+									card0.CardBlow = crry[count];
+									crry[count].CardAbove=card0;
+										
+									count1 =-1;
+									card0.CardBlow.setnotontop2();
 									break;
 								}	
-								
 							}
 							count++;
 						}
-						if(count == 28) {
-							card0.setBounds(xx,yy,102, 135);//回到原位
+						if(count1 != -1) {
+							if(card0.CardAbove != Card00) {//2张牌
+								card0.setBounds(xx,yy,102, 135);
+								card0.CardAbove.setPoisitionByCard(card0);//1张卡
+								
+								if(card0.CardAbove.CardAbove!=null) {
+									card0.CardAbove.CardAbove.setPoisitionByCard(card0.CardAbove);//2张卡
+									
+									if(card0.CardAbove.CardAbove.CardAbove!=null) {
+										card0.CardAbove.CardAbove.CardAbove.setPoisitionByCard(card0.CardAbove.CardAbove);//3张卡
+										
+										if(card0.CardAbove.CardAbove.CardAbove.CardAbove!=null) {
+											card0.CardAbove.CardAbove.CardAbove.CardAbove.setPoisitionByCard(card0.CardAbove.CardAbove.CardAbove);//4张卡
+											
+											if(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove!=null) {
+												card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.setPoisitionByCard(card0.CardAbove.CardAbove.CardAbove.CardAbove);//5张卡
+												
+												if(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove!=null) {
+													card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.setPoisitionByCard(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove);//6张卡
+													
+													if(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove!=null) {
+														card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.setPoisitionByCard(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove);//7张卡
+														
+														if(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove!=null) {
+															card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.setPoisitionByCard(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove);//8张卡
+															
+															if(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove!=null) {
+																card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.setPoisitionByCard(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove);//9张卡
+																
+																if(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove!=null) {
+																	card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.setPoisitionByCard(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove);//10张卡
+																	
+																	if(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove!=null) {
+																		card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.setPoisitionByCard(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove);//11张卡
+																		
+																		if(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove!=null) {
+																			card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.setPoisitionByCard(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove);//12张卡
+																			
+																			if(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove!=null) {
+																				card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.setPoisitionByCard(card0.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove.CardAbove);//13张卡
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+							else {
+								card0.setBounds(xx,yy,102, 135);//回到原位
+							}
 						}
 						
 						
@@ -401,22 +570,7 @@ public class GameTable {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {			
-				//if(turncount == 0) {
 					card0.toright(128);
-				//	turncount++;
-				//}
-				/*else if(turncount == 1){
-					card0.toright(148);
-					turncount++;
-				}
-				else if(turncount == 2){
-					card0.toright(148);
-					turncount++;
-				}
-				else if(turncount > 2){
-					card0.toright(148);
-				}*/
-				
 			}
 	 
 			@Override
@@ -457,67 +611,66 @@ public class GameTable {
 		
 
 		
-		panel_2.add(Card01);
+		panel_2.add(Card01,new Integer(200));
 		
-		panel_2.add(Card11);
-		panel_2.add(Card12);
+		panel_2.add(Card11,new Integer(200));
+		panel_2.add(Card12,new Integer(200));
 	
-		panel_2.add(Card21);
-		panel_2.add(Card22);
-		panel_2.add(Card23);
+		panel_2.add(Card21,new Integer(200));
+		panel_2.add(Card22,new Integer(200));
+		panel_2.add(Card23,new Integer(200));
 		
-		panel_2.add(Card31);
-		panel_2.add(Card32);
-		panel_2.add(Card33);
-		panel_2.add(Card34);
+		panel_2.add(Card31,new Integer(200));
+		panel_2.add(Card32,new Integer(200));
+		panel_2.add(Card33,new Integer(200));
+		panel_2.add(Card34,new Integer(200));
 		
-		panel_2.add(Card41);
-		panel_2.add(Card42);
-		panel_2.add(Card43);
-		panel_2.add(Card12);
-		panel_2.add(Card44);
-		panel_2.add(Card45);
+		panel_2.add(Card41,new Integer(200));
+		panel_2.add(Card42,new Integer(200));
+		panel_2.add(Card43,new Integer(200));
+		panel_2.add(Card44,new Integer(200));
+		panel_2.add(Card45,new Integer(200));
 		
-		panel_2.add(Card51);
-		panel_2.add(Card52);
-		panel_2.add(Card53);
-		panel_2.add(Card54);
-		panel_2.add(Card55);
-		panel_2.add(Card56);
+		panel_2.add(Card51,new Integer(200));
+		panel_2.add(Card52,new Integer(200));
+		panel_2.add(Card53,new Integer(200));
+		panel_2.add(Card54,new Integer(200));
+		panel_2.add(Card55,new Integer(200));
+		panel_2.add(Card56,new Integer(200));
 		
 
-		panel_2.add(Card61);
-		panel_2.add(Card62);
-		panel_2.add(Card63);
-		panel_2.add(Card64);
-		panel_2.add(Card65);
-		panel_2.add(Card66);
-		panel_2.add(Card67);
+		panel_2.add(Card61,new Integer(200));
+		panel_2.add(Card62,new Integer(200));
+		panel_2.add(Card63,new Integer(200));
+		panel_2.add(Card64,new Integer(200));
+		panel_2.add(Card65,new Integer(200));
+		panel_2.add(Card66,new Integer(200));
+		panel_2.add(Card67,new Integer(200));
 		
-		panel_2.add(Cardw01);
-		panel_2.add(Cardw02);
-		panel_2.add(Cardw03);
-		panel_2.add(Cardw04);
-		panel_2.add(Cardw05);
-		panel_2.add(Cardw06);
-		panel_2.add(Cardw07);
-		panel_2.add(Cardw08);
-		panel_2.add(Cardw09);
-		panel_2.add(Cardw10);
-		panel_2.add(Cardw11);
-		panel_2.add(Cardw12);		
-		panel_2.add(Cardw13);
-		panel_2.add(Cardw14);
-		panel_2.add(Cardw15);
-		panel_2.add(Cardw16);
-		panel_2.add(Cardw17);
-		panel_2.add(Cardw18);
-		panel_2.add(Cardw19);
-		panel_2.add(Cardw20);
-		panel_2.add(Cardw21);
-		panel_2.add(Cardw22);
-		panel_2.add(Cardw23);
-		panel_2.add(Cardw24);
+		panel_2.add(Cardw01,new Integer(200));
+		panel_2.add(Cardw02,new Integer(200));
+		panel_2.add(Cardw03,new Integer(200));
+		panel_2.add(Cardw04,new Integer(200));
+		panel_2.add(Cardw05,new Integer(200));
+		panel_2.add(Cardw06,new Integer(200));
+		panel_2.add(Cardw07,new Integer(200));
+		panel_2.add(Cardw08,new Integer(200));
+		panel_2.add(Cardw09,new Integer(200));
+		panel_2.add(Cardw10,new Integer(200));
+		panel_2.add(Cardw11,new Integer(200));
+		panel_2.add(Cardw12,new Integer(200));		
+		panel_2.add(Cardw13,new Integer(200));
+		panel_2.add(Cardw14,new Integer(200));
+		panel_2.add(Cardw15,new Integer(200));
+		panel_2.add(Cardw16,new Integer(200));
+		panel_2.add(Cardw17,new Integer(200));
+		panel_2.add(Cardw18,new Integer(200));
+		panel_2.add(Cardw19,new Integer(200));
+		panel_2.add(Cardw20,new Integer(200));
+		panel_2.add(Cardw21,new Integer(200));
+		panel_2.add(Cardw22,new Integer(200));
+		panel_2.add(Cardw23,new Integer(200));
+		panel_2.add(Cardw24,new Integer(200));
 		
 		
 		JLabel lblNewLabel = new JLabel("");

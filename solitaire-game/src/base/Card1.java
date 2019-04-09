@@ -6,12 +6,18 @@ import javax.swing.ImageIcon;
 
 public class Card1 extends Card {//附带翻转方法的card类
 	private boolean isontop = false;
+	private boolean isontop2 = false;
 	public boolean canmove=false;
+	public boolean canattach=true;
 	protected Card1 CardAbove;
 	protected Card1 CardBlow;
 	public Card1(int point,int patten,int x,int y,boolean issetup) {
 		super(point,patten,x,y,issetup);
 		isontop = issetup;
+		isontop2 = issetup;
+	}
+	public void setCantAttach() {
+		canattach=false;
 	}
 	public int getPoint() {
 		return point;
@@ -22,11 +28,20 @@ public class Card1 extends Card {//附带翻转方法的card类
 	public boolean getTop() {
 		return isontop;
 	}
+	public boolean getTop2() {
+		return isontop2;
+	}
 	public void setontop() {
 		isontop = true;
 	}
 	public void setnotontop() {
 		isontop = false;
+	}
+	public void setontop2() {
+		isontop2 = true;
+	}
+	public void setnotontop2() {
+		isontop2 = false;
 	}
 	
 	public void setPoisitionByCard(Card1 card) {
@@ -65,7 +80,9 @@ public class Card1 extends Card {//附带翻转方法的card类
 	}
 	
 	public void downsideup() {
+		if(!issetup) {
 		this.issetup=true;
+		this.isontop=true;
  	    Timer timer1 = new Timer(); 
         timer1.scheduleAtFixedRate(new TimerTask() {
         	int i=1;
@@ -92,7 +109,8 @@ public class Card1 extends Card {//附带翻转方法的card类
 				   	timer2.cancel();
                 }
             }
-        }, 400, 20);  	
+        }, 400, 20);  
+		}
 	}
 
 	public void toleft() {
@@ -155,5 +173,8 @@ public class Card1 extends Card {//附带翻转方法的card类
             }
         }, 400, 20);  	
 
+	}
+	public int getColor() {
+		return color;
 	}
 }
